@@ -42,23 +42,67 @@ sub plot {
 1;
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
-HTML::QRCode -
+HTML::QRCode - Generate HTML based QR Code
 
 =head1 SYNOPSIS
 
+  #!/usr/bin/env perl
+
   use HTML::QRCode;
+  use CGI
+
+  my $q = CGI->new;
+  my $text = $q->param('text') || 'http://example.com/';
+  my $qrcode = HTML::QRCode->new->plot($text);
+  print $q->header;
+  print <<"HTML";
+  <html>
+  <head></head>
+  <body>
+  $qrcode
+  </body>
+  </html>
+  HTML
 
 =head1 DESCRIPTION
 
-HTML::QRCode is
+HTML::QRCode is HTML based QRCode generator, using Text::QRCode
+
+=head1 METHODS
+
+=over 4
+
+=item new
+
+    $qrcode = HTML::QRCode->new(%params);
+
+The C<new()> constructor method instantiates a new Term::QRCode object.
+
+=item plot($text)
+
+    $arrayref = $qrcode->plot("blah blah");
+
+Return HTML based QR Code.
+
+=back
 
 =head1 AUTHOR
 
-Hideo Kimura E<lt>hide@hide-k.netE<gt>
+Hideo Kimura E<lt>hide <at> hide-k.netE<gt>
+
+Yoshiki Kurihara
+
+Yappo
+
+nipotan
 
 =head1 SEE ALSO
+
+C<Text::QRCode>, C<Imager::QRCode>, C<Term::QRCode>, C<HTML::QRCode>, C<http://www.qrcode.com/>, C<http://megaui.net/fukuchi/works/qrencode/index.en.html>
 
 =head1 LICENSE
 

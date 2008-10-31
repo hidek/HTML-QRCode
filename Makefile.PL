@@ -2,7 +2,8 @@ use inc::Module::Install;
 name 'HTML-QRCode';
 all_from 'lib/HTML/QRCode.pm';
 
-# requires '';
+requires 'Carp';
+requires 'Text::QRCode';
 
 tests 't/*.t';
 author_tests 'xt';
