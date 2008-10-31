@@ -8,3 +8,6 @@ __DATA__
 Hideo Kimura
 hide@hide-k.net
 HTML::QRCode
+Kurihara Yoshiki
+Yappo
+nipotan
