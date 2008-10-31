@@ -25,13 +25,13 @@ sub plot {
     my $arref = $self->{text_qrcode}->plot($text);
 
     my ($white, $black) = ($self->{white}, $self->{black});
-    my $w = "<td style=\"margin:0;padding:0;width:3px;height:3px;background-color: $white;\">";
-    my $b = "<td style=\"margin:0;padding:0;width:3px;height:3px;background-color: $black;\">";
+    my $w = "<td style=\"border:0;margin:0;padding:0;width:3px;height:3px;background-color: $white;\">";
+    my $b = "<td style=\"border:0;margin:0;padding:0;width:3px;height:3px;background-color: $black;\">";
 
     my $html
         .= '<table style="margin:0;padding:0;border-width:0;border-spacing:0;">';
     $html
-        .= '<tr style="margin:0;padding:0;">'
+        .= '<tr style="border:0;margin:0;padding:0;">'
         . join( '', map { $_ eq '*' ? $b : $w } @$_ ) . '</tr>'
         for (@$arref);
     $html .= '</table>';
