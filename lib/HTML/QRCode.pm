@@ -8,32 +8,50 @@ use Text::QRCode;
 use Carp;
 
 sub new {
-    my ( $class, %args ) = @_;
+    my ($class, %args) = @_;
 
     bless {
         text_qrcode => Text::QRCode->new,
-        white => 'white',
-        black => 'black',
+        white       => 'white',
+        black       => 'black',
         %args
     }, $class;
 }
 
 sub plot {
-    my ( $self, $text ) = @_;
+    my ($self, $text) = @_;
     croak 'Not enough arguments for plot()' unless $text;
 
     my $arref = $self->{text_qrcode}->plot($text);
-
     my ($white, $black) = ($self->{white}, $self->{black});
-    my $w = "<td style=\"border:0;margin:0;padding:0;width:3px;height:3px;background-color: $white;\">";
-    my $b = "<td style=\"border:0;margin:0;padding:0;width:3px;height:3px;background-color: $black;\">";
 
-    my $html
-        .= '<table style="margin:0;padding:0;border-width:0;border-spacing:0;">';
-    $html
-        .= '<tr style="border:0;margin:0;padding:0;">'
-        . join( '', map { $_ eq '*' ? $b : $w } @$_ ) . '</tr>'
-        for (@$arref);
+    my ($table, $tr, $td_w, $td_b);
+    if ($self->{use_style}) {
+        $table = '<table class="_qr">';
+        $tr    = '<tr class="_qr">';
+        $td_w  = '<td class="_qr_w">';
+        $td_b  = '<td class="_qr_b">';
+    } else {
+        $table = '<table style="margin:0;padding:0;border-width:0;border-spacing:0;">'; 
+        $tr    = '<tr style="border:0;margin:0;padding:0;">';
+        $td_w  = "<td style=\"border:0;margin:0;padding:0;width:3px;height:3px;background-color: $white;\">";
+        $td_b  = "<td style=\"border:0;margin:0;padding:0;width:3px;height:3px;background-color: $black;\">";
+    }
+
+    my $style =<<"STYLE";
+<style type="text/css">
+table._qr {margin:0;padding:0;border-width:0;border-spacing:0;}
+tr._qr {margin:0;padding:0;}
+td._qr_w {border:0;margin:0;padding:0;width:3px;height:3px;background-color:$white;}
+td._qr_b {border:0;margin:0;padding:0;width:3px;height:3px;background-color:$black;}
+</style>
+STYLE
+
+    $style = $self->{style} if $self->{style};
+
+    my $html = $style if $self->{use_style};
+    $html .= $table;
+    $html .= $tr . join('', map { $_ eq '*' ? $td_b : $td_w } @$_) . '</tr>' for (@$arref);
     $html .= '</table>';
 
     return $html;
