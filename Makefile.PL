@@ -7,6 +7,8 @@ all_from 'lib/HTML/QRCode.pm';
 requires 'Carp';
 requires 'Text::QRCode';
 
+resources repository => 'https://github.com/hidek/HTML-QRCode';
+
 tests 't/*.t';
 author_tests 'xt';
 
