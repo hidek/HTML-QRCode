@@ -1,4 +1,6 @@
 use inc::Module::Install;
+use Module::Install::AuthorTests;
+use Module::Install::TestBase;
 name 'HTML-QRCode';
 all_from 'lib/HTML/QRCode.pm';
 
