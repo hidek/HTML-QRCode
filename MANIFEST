@@ -1,5 +1,6 @@
 Changes
 example/qrcode.cgi
+example/qrcode_css.cgi
 inc/Module/Install.pm
 inc/Module/Install/AuthorTests.pm
 inc/Module/Install/Base.pm

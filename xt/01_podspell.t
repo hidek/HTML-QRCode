@@ -11,3 +11,5 @@ HTML::QRCode
 Kurihara Yoshiki
 Yappo
 nipotan
+Mark A. Stratman
+stratman@gmail.com
