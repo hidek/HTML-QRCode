@@ -149,8 +149,9 @@ take any of the following options in the C<%params> hash:
 =item use_css
 
 I<Recommended>. If you provide a true value for this option,
-the generated HTML will use CSS classes to format the output. Otherwise, all style
-information is embedded in C<style> tags within the HTML.
+the generated HTML will use CSS classes to format the output. Otherwise, all
+style information is embedded in C<style> attributes applied directly
+to the the HTML.
 
 This option signficantly reduces the size of the HTML, and is highly
 recommended.
