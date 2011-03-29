@@ -13,3 +13,6 @@ Yappo
 nipotan
 Mark A. Stratman
 stratman@gmail.com
+XHTML
+px
+stylesheet
