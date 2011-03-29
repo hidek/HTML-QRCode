@@ -28,24 +28,15 @@ sub new {
     }, $class;
 }
 
-sub output {
-    my ( $self, $text ) = @_;
-    croak 'Not enough arguments for output()' unless $text;
-
-    my $rv = '';
-    if ($self->{use_css}) {
-        $rv .= '<style type="text/css">' . $self->css . '</style>';
-    }
-    return $rv . $self->plot($text);
-}
-
 sub plot {
     my ( $self, $text ) = @_;
     croak 'Not enough arguments for plot()' unless $text;
 
     my $arref = $self->{text_qrcode}->plot($text);
 
-    my $html = $self->_start_table;
+    my $html = '';
+    $html .= '<style type="text/css">' . $self->css . '</style>' if $self->{use_css};
+    $html .= $self->_start_table;
     for my $module (@$arref) {
         $html .= $self->_tr( join( '', map { $self->_td($_ eq '*') } @$module ) );
     }
@@ -109,6 +100,9 @@ HTML::QRCode - Generate HTML based QR Code
   my $q = CGI->new;
   my $text = $q->param('text') || 'http://example.com/';
 
+  my $qrcode = HTML::QRCode->new->output($text);
+
+  // use css
   my $qrcode = HTML::QRCode->new(use_css => 1)->output($text);
 
   print $q->header;
